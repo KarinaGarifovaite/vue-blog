@@ -21,16 +21,15 @@
       v-model="post.imgUrl"
     ></form-control>
     <p v-if="errorMsg" class="form__error-message">{{ errorMsg }}</p>
-    <the-button class="form__submit" type="submit">Post!</the-button>
+    <button class="form__submit">Post!</button>
   </form>
 </template>
 
 <script>
-import TheButton from '../Button/TheButton.vue';
 import FormControl from '../FormControl/FormControl.vue';
 
 export default {
-  components: { FormControl, TheButton },
+  components: { FormControl },
   data() {
     return {
       post: {
