@@ -51,5 +51,19 @@ export default {
 
 .form__form-control input:focus {
   outline: none;
+  background: none;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+
+@media screen and (min-width: 768px) {
+  .form__form-control input {
+    font-size: 15px;
+  }
 }
 </style>

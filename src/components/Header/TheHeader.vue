@@ -4,10 +4,10 @@
       SuperBlog`as.
     </router-link>
 
-    <div class="header__burger" @click="activeBar">
+    <div class="header__burger" @click="activeBar($event)">
       <i class="fas fa-bars"></i>
     </div>
-    <the-navigation v-if="showBar" @hide="hideBar"></the-navigation>
+    <the-navigation @hide="hideBar($event)"></the-navigation>
   </header>
 </template>
 
@@ -15,26 +15,16 @@
 import TheNavigation from './TheNavigation.vue';
 export default {
   components: { TheNavigation },
-  data() {
-    return {
-      showBar: false,
-    };
-  },
+
   methods: {
-    // Open navigation
-    activeBar() {
-      this.showBar = !this.showBar;
+    // Open navigation by event bubbling
+    activeBar(e) {
+      e.target.parentElement.nextElementSibling.classList.toggle('hidden');
     },
-    // Hiding navigation then link is clicked
-    hideBar() {
-      this.showBar = false;
+    // Hiding nav everytime new link is clicked
+    hideBar(e) {
+      e.target.closest('nav').classList.add('hidden');
     },
-  },
-  // Making sure on desktop navigation always visible
-  mounted() {
-    if (window.innerWidth >= 1024) {
-      this.showBar = true;
-    }
   },
 };
 </script>

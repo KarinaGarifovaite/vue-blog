@@ -1,23 +1,27 @@
 <template>
-  <nav class="nav">
+  <nav class="nav hidden">
     <ul class="nav__list">
-      <li class="nav__list--item" @click="$emit('hide')">
+      <li class="nav__list--item" @click="$emit('hide', $event)">
         <router-link to="/">Home</router-link>
       </li>
-      <li v-if="isLoggedIn" class="nav__list--item" @click="$emit('hide')">
+      <li
+        v-if="isLoggedIn"
+        class="nav__list--item"
+        @click="$emit('hide', $event)"
+      >
         <router-link to="/user-profile">Profile</router-link>
       </li>
       <li
         v-if="!isLoggedIn"
         class="nav__list--item login"
-        @click="$emit('hide')"
+        @click="$emit('hide', $event)"
       >
         <router-link to="/login">Login</router-link>
       </li>
       <li
         v-if="!isLoggedIn"
         class="nav__list--item register"
-        @click="$emit('hide')"
+        @click="$emit('hide', $event)"
       >
         <router-link to="/register">Register</router-link>
       </li>
@@ -44,7 +48,9 @@ export default {
   width: 100%;
   animation: fade-nav 0.5s ease-in;
 }
-
+.header .nav.hidden {
+  display: none;
+}
 @keyframes fade-nav {
   0% {
     opacity: 0;
@@ -64,6 +70,7 @@ export default {
   align-items: center;
   list-style: none;
 }
+
 .nav__list--item {
   margin: 10px;
   padding: 10px;
@@ -109,6 +116,9 @@ export default {
 }
 
 @media screen and (min-width: 1024px) {
+  .header .nav.hidden {
+    display: block;
+  }
   .header .nav__list {
     flex-direction: row;
     justify-content: flex-end;
