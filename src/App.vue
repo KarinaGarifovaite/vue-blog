@@ -1,7 +1,10 @@
 <template>
   <div>
     <the-header></the-header>
-    <router-view />
+    <transition name="fade">
+      <router-view> </router-view>
+    </transition>
+
     <the-footer></the-footer>
   </div>
 </template>
@@ -20,7 +23,9 @@ export default {
   box-sizing: border-box;
   font-family: 'Montserrat', sans-serif;
 }
-
+*:focus {
+  outline-color: #a47e1b;
+}
 .hero__img {
   background-image: url(./assets/office.jpg);
   background-position: center;
@@ -50,6 +55,19 @@ export default {
   text-align: center;
   width: 100%;
   font-weight: 300;
+}
+
+.fade-enter-active {
+  animation: fade 1.2s ease-in-out;
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 @media screen and (min-width: 768px) {
   .hero__img h1 {

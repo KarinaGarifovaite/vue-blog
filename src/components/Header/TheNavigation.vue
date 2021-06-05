@@ -1,16 +1,24 @@
 <template>
   <nav class="nav">
     <ul class="nav__list">
-      <li class="nav__list--item">
+      <li class="nav__list--item" @click="$emit('hide')">
         <router-link to="/">Home</router-link>
       </li>
-      <li v-if="isLoggedIn" class="nav__list--item">
+      <li v-if="isLoggedIn" class="nav__list--item" @click="$emit('hide')">
         <router-link to="/user-profile">Profile</router-link>
       </li>
-      <li v-if="!isLoggedIn" class="nav__list--item login">
+      <li
+        v-if="!isLoggedIn"
+        class="nav__list--item login"
+        @click="$emit('hide')"
+      >
         <router-link to="/login">Login</router-link>
       </li>
-      <li v-if="!isLoggedIn" class="nav__list--item register">
+      <li
+        v-if="!isLoggedIn"
+        class="nav__list--item register"
+        @click="$emit('hide')"
+      >
         <router-link to="/register">Register</router-link>
       </li>
     </ul>
@@ -24,8 +32,9 @@ export default {
       isLoggedIn: false,
     };
   },
+  // If user is logged in, navigation links changes
   mounted() {
-    if (localStorage.getItem('secret-key')) this.isLoggedIn = true;
+    if (localStorage.getItem('user')) this.isLoggedIn = true;
   },
 };
 </script>
@@ -33,6 +42,18 @@ export default {
 <style scoped>
 .header .nav {
   width: 100%;
+  animation: fade-nav 0.5s ease-in;
+}
+
+@keyframes fade-nav {
+  0% {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .header .nav__list {

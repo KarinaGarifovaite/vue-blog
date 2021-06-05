@@ -20,17 +20,16 @@
       v-model="user.passwordTwo"
     ></form-control>
     <p v-if="errorMsg" class="form__error-message">{{ errorMsg }}</p>
-    <the-button class="form__submit" type="submit">Submit</the-button>
+    <button class="form__submit">Submit</button>
     <p class="form__additional-text">Already have an account?</p>
     <router-link to="/login" class="form__redirect">Login</router-link>
   </form>
 </template>
 
 <script>
-import TheButton from '../Button/TheButton';
 import FormControl from '../FormControl/FormControl.vue';
 export default {
-  components: { FormControl, TheButton },
+  components: { FormControl },
   data() {
     return {
       user: {
@@ -41,7 +40,12 @@ export default {
       errorMsg: '',
     };
   },
+  // Scroll to top then mounted
+  mounted() {
+    window.scrollTo(0, 0);
+  },
   methods: {
+    // Registration submision and validation
     submitRegistration() {
       if (!this.user.name || !this.user.password || !this.user.passwordTwo) {
         this.errorMsg = 'All fields are required!';
@@ -61,11 +65,21 @@ export default {
             passwordOne: this.user.password,
             passwordTwo: this.user.passwordTwo,
           }),
-        }).then((res) => {
-          if (res.ok) {
-            this.$router.push('/login');
-          }
-        });
+        })
+          .then((res) => {
+            if (res.ok) {
+              return res.json();
+            }
+          })
+          .then((data) => {
+            if (!data.success) {
+              // Setting server's error message to errorMsg in case I forgot something in validation
+              this.errorMsg = data.message;
+            } else {
+              // If success redirected to login page
+              this.$router.push('/login');
+            }
+          });
       }
     },
   },

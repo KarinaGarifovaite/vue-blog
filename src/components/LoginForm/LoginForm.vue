@@ -14,7 +14,7 @@
       v-model="user.password"
     ></form-control>
     <p v-if="errorMsg" class="form__error-message">{{ errorMsg }}</p>
-    <the-button class="form__submit" type="submit">Login</the-button>
+    <button class="form__submit">Login</button>
 
     <p class="form__additional-text">Don't have an account?</p>
     <router-link to="/register" class="form__redirect">Register</router-link>
@@ -22,10 +22,9 @@
 </template>
 
 <script>
-import TheButton from '../Button/TheButton.vue';
 import FormControl from '../FormControl/FormControl.vue';
 export default {
-  components: { FormControl, TheButton },
+  components: { FormControl },
   data() {
     return {
       user: {
@@ -35,10 +34,15 @@ export default {
       errorMsg: '',
     };
   },
+  // Scroll to top then mounted
+  mounted() {
+    window.scrollTo(0, 0);
+  },
   methods: {
+    // Login submision and validation
     submitLogin() {
       if (!this.user.username || !this.user.password) {
-        return (this.errorMsg = 'Please enter username and password.');
+        this.errorMsg = 'Please enter username and password.';
       } else {
         fetch('http://167.99.138.67:1111/login', {
           method: 'POST',
@@ -56,9 +60,22 @@ export default {
             }
           })
           .then((data) => {
-            const { secretKey } = data;
-            localStorage.setItem('secret-key', secretKey);
-            this.$router.push('/user-profile');
+            if (!data.success) {
+              // error message depends on server's error message
+              this.errorMsg = data.message;
+            } else {
+              const { secretKey } = data;
+              // Setting user to local storage as an object, so later I can use his name and secret key
+              localStorage.setItem(
+                'user',
+                JSON.stringify({
+                  secretKey: secretKey,
+                  name: this.user.username,
+                })
+              );
+              // if success - redirecting to user profile
+              this.$router.push('/user-profile');
+            }
           });
       }
     },

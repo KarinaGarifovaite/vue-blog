@@ -1,7 +1,7 @@
 <template>
-  <main class="main">
+  <section class="main">
     <h2 class="main__title">
-      This is all {{ this.$route.params.name }} posts &darr;
+      My posts &darr;
     </h2>
     <section v-for="post in authorPosts" :key="post.id" class="post ">
       <img :src="post.image" class="post__img" />
@@ -11,12 +11,13 @@
           <span>{{ post.username }}</span>
         </h4>
         <h3 class="post__title">{{ post.title }}</h3>
+
         <router-link :to="`/${post.username}/${post.id}`"
           >Read more &rarr;</router-link
         >
       </div>
     </section>
-  </main>
+  </section>
 </template>
 
 <script>
@@ -27,11 +28,10 @@ export default {
     };
   },
   mounted() {
-    //Scroll to top
-    window.scrollTo(0, 0);
+    // Getting user's name from local storage so I can use it then fetching his posts
+    let { name } = JSON.parse(localStorage.getItem('user'));
 
-    // Getting particular user posts
-    fetch(`http://167.99.138.67:1111/getuserposts/${this.$route.params.name}`)
+    fetch(`http://167.99.138.67:1111/getuserposts/${name}`)
       .then((res) => res.json())
       .then((data) => (this.authorPosts = data.data));
   },

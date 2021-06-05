@@ -7,7 +7,7 @@
     <div class="header__burger" @click="activeBar">
       <i class="fas fa-bars"></i>
     </div>
-    <the-navigation v-if="showBar"></the-navigation>
+    <the-navigation v-if="showBar" @hide="hideBar"></the-navigation>
   </header>
 </template>
 
@@ -21,10 +21,16 @@ export default {
     };
   },
   methods: {
+    // Open navigation
     activeBar() {
       this.showBar = !this.showBar;
     },
+    // Hiding navigation then link is clicked
+    hideBar() {
+      this.showBar = false;
+    },
   },
+  // Making sure on desktop navigation always visible
   mounted() {
     if (window.innerWidth >= 1024) {
       this.showBar = true;

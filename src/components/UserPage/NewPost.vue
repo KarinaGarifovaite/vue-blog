@@ -42,8 +42,11 @@ export default {
     };
   },
   methods: {
+    // New Post submision and validation
     submitPost() {
-      let secretKey = localStorage.getItem('secret-key');
+      // Getting secretKey from local storage
+      let { secretKey } = JSON.parse(localStorage.getItem('user'));
+
       if (!this.post.title || !this.post.text || !this.post.imgUrl) {
         this.errorMsg =
           'Please make sure all fields has at least few characters!';
@@ -63,19 +66,20 @@ export default {
             image: this.post.imgUrl,
             secretKey: secretKey,
           }),
-        })
-          .then((res) => {
-            if (res.ok) {
-              this.errorMsg = 'Post successfully created!';
-            }
-          })
-          .then((data) => console.log(data));
+        }).then((res) => {
+          if (res.ok) {
+            this.errorMsg = 'Post successfully created!';
+            // Removing  message from DOM after 10s
+            setTimeout(() => {
+              this.errorMsg = '';
+            }, 10000);
+          }
+        });
       }
-
+      // Back to initial state
       this.post.title = '';
       this.post.text = '';
       this.post.imgUrl = '';
-      this.errorMsg = '';
     },
   },
 };
@@ -87,5 +91,11 @@ textarea {
   padding: 20px;
   border: 1px solid #a47e1b;
   font-family: inherit;
+}
+
+@media screen and (min-width: 768px) {
+  textarea {
+    width: 60%;
+  }
 }
 </style>

@@ -11,7 +11,6 @@
       <div class="user-profile__greeting--img">
         <h2>{{ greeting() }}</h2>
       </div>
-
       <button @click="confirmLogout">
         Log out <i class="fas fa-sign-out-alt"></i>
       </button>
@@ -34,25 +33,35 @@ export default {
       showModal: false,
     };
   },
+  // Scroll to top then mounted
+  mounted() {
+    window.scrollTo(0, 0);
+  },
   methods: {
+    // Greeting message depending on day time
     greeting() {
+      // Getting curent time and users name from local storage
       const time = new Date().getHours();
+      const { name } = JSON.parse(localStorage.getItem('user'));
 
       if (time <= 12) {
-        return `Labas rytas!`;
+        return `Labas rytas, ${name}!`;
       } else if (time < 17) {
-        return `Labà dienà!`;
+        return `Labà dienà, ${name}!`;
       } else {
-        return `Labas vakaras!`;
+        return `Labas vakaras, ${name}!`;
       }
     },
+    // Logout confirmation modal
     confirmLogout() {
       this.showModal = true;
     },
+    // Logout function
     logout() {
-      localStorage.removeItem('secret-key');
+      localStorage.removeItem('user');
       this.$router.push('/');
     },
+    // Hide modal if canceled
     hideModal() {
       this.showModal = false;
     },
@@ -100,5 +109,15 @@ export default {
   text-align: center;
   color: #a47e1b;
   font-weight: 400;
+}
+
+@media screen and (min-width: 768px) {
+  .user-profile__greeting--img h2 {
+    font-size: 35px;
+  }
+
+  .user-profile__greeting button {
+    font-size: 20px;
+  }
 }
 </style>
