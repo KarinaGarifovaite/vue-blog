@@ -46,6 +46,7 @@
 
 <script>
 import BaseModal from '../Modal/BaseModal.vue';
+
 export default {
   components: { BaseModal },
   data() {
@@ -54,18 +55,13 @@ export default {
       isAuth: false,
       showDeleteModal: false,
       showUpdateModal: false,
+
       showSaveBtn: false,
       errorMsg: '',
     };
   },
-  mounted() {
-    // Fetching particular post
-    fetch(
-      `http://167.99.138.67:1111/getsinglepost/${this.$route.params.name}/${this.$route.params.id}`
-    )
-      .then((res) => res.json())
-      .then((data) => (this.post = data.data));
 
+  mounted() {
     // Checking if user is logged in, if so - post controls appears and user can update his posts.
     if (JSON.parse(localStorage.getItem('user'))) {
       let { name } = JSON.parse(localStorage.getItem('user'));
@@ -73,6 +69,12 @@ export default {
         this.isAuth = true;
       }
     }
+    // Fetching particular post
+    fetch(
+      `http://167.99.138.67:1111/getsinglepost/${this.$route.params.name}/${this.$route.params.id}`
+    )
+      .then((res) => res.json())
+      .then((data) => (this.post = data.data));
   },
   methods: {
     // Converting date from timestamp to normal date
@@ -159,6 +161,14 @@ export default {
       this.showDeleteModal = false;
       this.showUpdateModal = false;
     },
+  },
+  // Warning user about unsaved changes
+  beforeRouteLeave(_, _2, next) {
+    if (this.showSaveBtn) {
+      this.showUpdateModal = true;
+    } else {
+      next();
+    }
   },
 };
 </script>

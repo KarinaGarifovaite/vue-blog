@@ -1,28 +1,29 @@
 <template>
-  <form class="form" @submit.prevent="submitPost">
-    <h2>Write a Post!</h2>
-    <form-control
-      labelText="Post Title:"
-      inputType="text"
-      inputId="title"
-      v-model="post.title"
-    ></form-control>
-
-    <textarea
-      cols="30"
-      rows="10"
-      placeholder="Post text goes here..."
-      v-model="post.text"
-    ></textarea>
-    <form-control
-      labelText="Image Url:"
-      inputType="url"
-      inputId="imgUrl"
-      v-model="post.imgUrl"
-    ></form-control>
-    <p v-if="errorMsg" class="form__error-message">{{ errorMsg }}</p>
-    <button class="form__submit">Post!</button>
-  </form>
+  <div>
+    <form class="form" @submit.prevent="submitPost">
+      <h2>Write a Post!</h2>
+      <form-control
+        labelText="Post Title:"
+        inputType="text"
+        inputId="title"
+        v-model="post.title"
+      ></form-control>
+      <textarea
+        cols="30"
+        rows="10"
+        placeholder="Post text goes here..."
+        v-model="post.text"
+      ></textarea>
+      <form-control
+        labelText="Image Url:"
+        inputType="url"
+        inputId="imgUrl"
+        v-model="post.imgUrl"
+      ></form-control>
+      <p v-if="errorMsg" class="form__error-message">{{ errorMsg }}</p>
+      <button class="form__submit">Post!</button>
+    </form>
+  </div>
 </template>
 
 <script>
@@ -38,9 +39,13 @@ export default {
         imgUrl: '',
       },
       errorMsg: '',
+      showModal: false,
     };
   },
   methods: {
+    hideModal() {
+      this.showUpdateModal = false;
+    },
     // New Post submision and validation
     submitPost() {
       // Getting secretKey from local storage
