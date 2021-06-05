@@ -1,13 +1,13 @@
 <template>
-  <section>
-    <img :src="post.image" />
-    <div>
-      <h4>
+  <section class="post single">
+    <img :src="post.image" class="post__img" />
+    <div class="post__content">
+      <h4 class="post__date">
         <strong>{{ getPostDate(post.timestamp) }}</strong> /
         <span>{{ post.username }}</span>
       </h4>
-      <h3>{{ post.title }}</h3>
-      <p>{{ post.description }}</p>
+      <h3 class="post__title">{{ post.title }}</h3>
+      <p class="post__text">{{ post.description }}</p>
       <router-link :to="`/${post.username}`"
         >Read more author's posts</router-link
       >
@@ -37,3 +37,17 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+@media screen and (min-width: 768px) {
+  .post.single {
+    width: 100%;
+  }
+  .post.single img {
+    max-width: 90%;
+  }
+  .post.single .post__content {
+    max-width: 90%;
+  }
+}
+</style>

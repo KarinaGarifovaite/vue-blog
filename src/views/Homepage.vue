@@ -1,5 +1,10 @@
 <template>
-  <all-posts></all-posts>
+  <div>
+    <div class="hero__img">
+      <h1>SuperBlog`as</h1>
+    </div>
+    <all-posts></all-posts>
+  </div>
 </template>
 
 <script>

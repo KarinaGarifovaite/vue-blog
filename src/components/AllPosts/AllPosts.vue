@@ -8,7 +8,7 @@
           <span>{{ post.username }}</span>
         </h4>
         <h3 class="post__title">{{ post.title }}</h3>
-        <p class="post__text">{{ post.description }}</p>
+
         <router-link :to="`/${post.username}/${post.id}`"
           >Read more &rarr;</router-link
         >
@@ -40,7 +40,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .main {
   display: flex;
   flex-direction: column;
@@ -50,12 +50,12 @@ export default {
 }
 .post {
   margin: 20px 0;
-  padding-bottom: 20px;
+  padding: 20px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   overflow: hidden;
-  border-bottom: 1px solid #a47e1b;
+  border-top: 1px solid #a47e1b;
 }
 
 .post__img {
@@ -74,7 +74,9 @@ export default {
   font-weight: 300;
   color: #a47e1b;
 }
-
+.post__title {
+  margin: 10px 0;
+}
 .post__text {
   margin: 10px 0;
   font-weight: 300;
@@ -82,9 +84,32 @@ export default {
 }
 
 .post__content a {
-  padding: 10px 5px;
+  padding: 10px 0;
   text-decoration: none;
   text-transform: uppercase;
   color: #a47e1b;
+}
+
+@media screen and (min-width: 768px) {
+  .main {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+  .post {
+    width: 50%;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .post {
+    width: 30%;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .post {
+    width: 25%;
+  }
 }
 </style>

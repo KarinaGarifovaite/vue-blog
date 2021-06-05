@@ -1,5 +1,6 @@
 <template>
   <form @submit.prevent="submitLogin" class="form">
+    <h2>Login</h2>
     <form-control
       labelText="Username:"
       inputId="username"
@@ -12,8 +13,9 @@
       inputType="password"
       v-model="user.password"
     ></form-control>
-    <the-button class="form__submit" type="submit">Login</the-button>
     <p v-if="errorMsg" class="form__error-message">{{ errorMsg }}</p>
+    <the-button class="form__submit" type="submit">Login</the-button>
+
     <p class="form__additional-text">Don't have an account?</p>
     <router-link to="/register" class="form__redirect">Register</router-link>
   </form>
@@ -63,4 +65,3 @@ export default {
   },
 };
 </script>
-

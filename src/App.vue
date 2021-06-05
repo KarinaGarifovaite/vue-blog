@@ -20,4 +20,44 @@ export default {
   box-sizing: border-box;
   font-family: 'Montserrat', sans-serif;
 }
+
+.hero__img {
+  background-image: url(./assets/office.jpg);
+  background-position: center;
+  background-size: cover;
+  width: 100%;
+  height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+}
+
+.hero__img h1 {
+  width: 100%;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.5);
+  text-align: center;
+  color: #a47e1b;
+  font-weight: 400;
+}
+
+.main {
+  min-height: calc(100vh - 200px);
+}
+
+.main__title {
+  text-align: center;
+  width: 100%;
+  font-weight: 300;
+}
+@media screen and (min-width: 768px) {
+  .hero__img h1 {
+    padding: 25px;
+  }
+  .main__title {
+    margin-top: 20px;
+    font-size: 30px;
+  }
+}
 </style>

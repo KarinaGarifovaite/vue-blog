@@ -1,5 +1,6 @@
 <template>
   <form @submit.prevent="submitRegistration" class="form">
+    <h2>Register</h2>
     <form-control
       labelText="Enter your name:"
       inputId="name"
@@ -79,6 +80,16 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.form h2 {
+  background: linear-gradient(to right bottom, #a47e1b, #b69121, #dbb42c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 30px;
+  margin-bottom: 20px;
 }
 .form__submit {
   border: none;

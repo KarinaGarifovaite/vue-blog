@@ -1,6 +1,9 @@
 <template>
   <header class="header">
-    <div class="header__logo">SuperBlog`as.</div>
+    <router-link to="/" class="header__logo">
+      SuperBlog`as.
+    </router-link>
+
     <div class="header__burger" @click="activeBar">
       <i class="fas fa-bars"></i>
     </div>
@@ -21,6 +24,11 @@ export default {
     activeBar() {
       this.showBar = !this.showBar;
     },
+  },
+  mounted() {
+    if (window.innerWidth >= 1024) {
+      this.showBar = true;
+    }
   },
 };
 </script>
@@ -46,5 +54,18 @@ export default {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   cursor: pointer;
+}
+
+@media screen and (min-width: 1024px) {
+  .header {
+    flex-wrap: nowrap;
+    padding: 0;
+  }
+  .header__logo {
+    margin-left: 25px;
+  }
+  .header__burger {
+    display: none;
+  }
 }
 </style>

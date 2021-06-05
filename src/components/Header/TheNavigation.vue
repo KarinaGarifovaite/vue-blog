@@ -86,4 +86,11 @@ export default {
 .footer .nav__list--item a:hover {
   opacity: 0.7;
 }
+
+@media screen and (min-width: 1024px) {
+  .header .nav__list {
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+}
 </style>

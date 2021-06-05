@@ -1,17 +1,22 @@
 <template>
-  <div>
-    <section v-for="post in authorPosts" :key="post.id">
-      <img :src="post.image" />
-      <div>
-        <h4>
+  <main class="main">
+    <h2 class="main__title">
+      This is all {{ this.$route.params.name }} posts &darr;
+    </h2>
+    <section v-for="post in authorPosts" :key="post.id" class="post ">
+      <img :src="post.image" class="post__img" />
+      <div class="post__content">
+        <h4 class="post__date">
           <strong>{{ getPostDate(post.timestamp) }}</strong> /
           <span>{{ post.username }}</span>
         </h4>
-        <h3>{{ post.title }}</h3>
-        <p>{{ post.description }}</p>
+        <h3 class="post__title">{{ post.title }}</h3>
+        <router-link :to="`/${post.username}/${post.id}`"
+          >Read more &rarr;</router-link
+        >
       </div>
     </section>
-  </div>
+  </main>
 </template>
 
 <script>
