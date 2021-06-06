@@ -9,30 +9,27 @@
           <option value="oldest">Oldest</option>
         </select>
       </div>
-
-      <section v-for="post in posts" :key="post.id" class="post">
-        <img :src="post.image" class="post__img" />
-        <div class="post__content">
-          <h4 class="post__date">
-            <strong>{{ getPostDate(post.timestamp) }}</strong> /
-            <span>{{ post.username }}</span>
-          </h4>
-          <h3 class="post__title">{{ post.title }}</h3>
-
-          <router-link :to="`/${post.username}/${post.id}`"
-            >Read more &rarr;</router-link
-          >
-        </div>
-      </section>
+      <post-template
+        v-for="post in posts"
+        :key="post.id"
+        :image="post.image"
+        :date="getPostDate(post.timestamp)"
+        :username="post.username"
+        :title="post.title"
+        :link="`${post.username}/${post.id}`"
+        linkText="Read More"
+      ></post-template>
     </main>
   </div>
 </template>
 
 <script>
 import Spinner from '../Spinner/Spinner.vue';
+import PostTemplate from './PostTemplate.vue';
 export default {
   components: {
     Spinner,
+    PostTemplate,
   },
   data() {
     return {

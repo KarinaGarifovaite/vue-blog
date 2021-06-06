@@ -53,7 +53,7 @@ export default {
 
       if (!this.post.title || !this.post.text || !this.post.imgUrl) {
         this.errorMsg =
-          'Please make sure all fields has at least few characters!';
+          'Please make sure title is at least 20 symbols length, description is at least 50 symbols length and image url includes "http"!';
       } else if (this.post.title.length < 20) {
         this.errorMsg = 'Title must be at least 20 symbols length!';
       } else if (this.post.text.length < 50) {

@@ -3,25 +3,23 @@
     <h2 class="main__title">
       My posts &darr;
     </h2>
-    <section v-for="post in authorPosts" :key="post.id" class="post ">
-      <img :src="post.image" class="post__img" />
-      <div class="post__content">
-        <h4 class="post__date">
-          <strong>{{ getPostDate(post.timestamp) }}</strong> /
-          <span>{{ post.username }}</span>
-        </h4>
-        <h3 class="post__title">{{ post.title }}</h3>
-
-        <router-link :to="`/${post.username}/${post.id}`"
-          >Read more &rarr;</router-link
-        >
-      </div>
-    </section>
+    <post-template
+      v-for="post in authorPosts"
+      :key="post.id"
+      :image="post.image"
+      :date="getPostDate(post.timestamp)"
+      :username="post.username"
+      :title="post.title"
+      :link="`${post.username}/${post.id}`"
+      linkText="Read More"
+    ></post-template>
   </section>
 </template>
 
 <script>
+import PostTemplate from '../AllPosts/PostTemplate.vue';
 export default {
+  components: { PostTemplate },
   data() {
     return {
       authorPosts: [],

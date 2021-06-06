@@ -4,7 +4,7 @@ import Register from '../views/Register.vue';
 import Login from '../views/Login.vue';
 import Homepage from '../views/Homepage.vue';
 import ThePost from '../components/AllPosts/ThePost.vue';
-import UserPosts from '../components/AllPosts/UserPosts.vue';
+import AuthorPosts from '../components/AllPosts/AuthorPosts.vue';
 import UserProfile from '../views/UserProfile.vue';
 
 Vue.use(VueRouter);
@@ -33,8 +33,8 @@ const routes = [
   },
   {
     path: '/:name',
-    name: 'UserPosts',
-    component: UserPosts,
+    name: 'AuthorPosts',
+    component: AuthorPosts,
   },
   {
     path: '/:name/:id',

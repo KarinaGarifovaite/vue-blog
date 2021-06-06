@@ -45,11 +45,11 @@ export default {
       const { name } = JSON.parse(localStorage.getItem('user'));
 
       if (time <= 12) {
-        return `Labas rytas, ${name}!`;
+        return `Good morning, ${name}!`;
       } else if (time < 17) {
-        return `Labà dienà, ${name}!`;
+        return `Good afternoon, ${name}!`;
       } else {
-        return `Labas vakaras, ${name}!`;
+        return `Good evening, ${name}!`;
       }
     },
     // Logout confirmation modal
