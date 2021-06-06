@@ -99,6 +99,7 @@ export default {
 .form h2 {
   background: linear-gradient(to right bottom, #a47e1b, #b69121, #dbb42c);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   text-transform: uppercase;
   font-weight: 500;
