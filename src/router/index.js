@@ -27,9 +27,17 @@ const routes = [
   },
   {
     path: '/user-profile',
-
     name: 'UserProfile',
     component: UserProfile,
+    beforeEnter(_, _2, next) {
+      if (!localStorage.getItem('user')) {
+        next({
+          name: 'Login',
+        });
+      } else {
+        next();
+      }
+    },
   },
   {
     path: '/:name',

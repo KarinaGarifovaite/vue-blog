@@ -125,6 +125,8 @@ export default {
   margin-bottom: 15px;
   font-size: 12px;
   color: #ba181b;
+  width: 60%;
+  text-align: center;
 }
 
 .form__additional-text {

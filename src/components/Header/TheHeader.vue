@@ -42,12 +42,14 @@ export default {
   font-weight: 400;
   background: linear-gradient(to right bottom, #a47e1b, #b69121, #dbb42c);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 .header__burger {
   font-size: 25px;
   background: linear-gradient(to right bottom, #a47e1b, #b69121, #dbb42c);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   cursor: pointer;
 }
