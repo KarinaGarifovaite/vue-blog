@@ -7,7 +7,7 @@
     <div class="header__burger" @click="activeBar($event)">
       <i class="fas fa-bars"></i>
     </div>
-    <the-navigation @hide="hideBar($event)"></the-navigation>
+    <the-navigation></the-navigation>
   </header>
 </template>
 
@@ -20,10 +20,6 @@ export default {
     // Open navigation by event bubbling
     activeBar(e) {
       e.target.parentElement.nextElementSibling.classList.toggle('hidden');
-    },
-    // Hiding nav everytime new link is clicked
-    hideBar(e) {
-      e.target.closest('nav').classList.add('hidden');
     },
   },
 };

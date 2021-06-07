@@ -1,28 +1,16 @@
 <template>
-  <nav class="nav hidden">
+  <nav class="nav hidden" ref="navigation">
     <ul class="nav__list">
-      <li class="nav__list--item" @click="$emit('hide', $event)">
+      <li class="nav__list--item">
         <router-link to="/">Home</router-link>
       </li>
-      <li
-        v-if="isLoggedIn"
-        class="nav__list--item"
-        @click="$emit('hide', $event)"
-      >
+      <li v-if="isLoggedIn" class="nav__list--item">
         <router-link to="/user-profile">Profile</router-link>
       </li>
-      <li
-        v-if="!isLoggedIn"
-        class="nav__list--item login"
-        @click="$emit('hide', $event)"
-      >
+      <li v-if="!isLoggedIn" class="nav__list--item login">
         <router-link to="/login">Login</router-link>
       </li>
-      <li
-        v-if="!isLoggedIn"
-        class="nav__list--item register"
-        @click="$emit('hide', $event)"
-      >
+      <li v-if="!isLoggedIn" class="nav__list--item register">
         <router-link to="/register">Register</router-link>
       </li>
     </ul>
@@ -35,6 +23,11 @@ export default {
     return {
       isLoggedIn: false,
     };
+  },
+  watch: {
+    $route() {
+      this.$refs.navigation.classList.add('hidden');
+    },
   },
   // If user is logged in, navigation links changes
   mounted() {
